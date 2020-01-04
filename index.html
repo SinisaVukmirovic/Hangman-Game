@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Hangman Game</h1>
+        <span>Dota Edition</span>
+    </header>
+
+    <div class="gameplay">
+        <div class="hangman-tries-left">
+            <div class="hangman">
+                <!-- <img src="./images/0.jpg" alt="hangman"> -->
+            </div>
+            <div class="tries-left"><p>Wrong</p> 
+                <p>guesses:</p> 
+                <p><span>0</span> of <span id="maxWrong">?</span></p>
+            </div>
+        </div>
+
+        <div class="hero-name-letters">
+            <button id="start">Start</button>
+            <div class="hero-name"></div>
+            <div class="letters"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
