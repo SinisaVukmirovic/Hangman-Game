@@ -1,14 +1,16 @@
 let heroNames = [];
 let randomHeroName = '';
 let mistakes = 0;
-let maxWrong;
+let maxWrong = 6;
 let guessed = [];
 let wordStatus = null;
 
-let maxWrongElem = document.querySelector('#maxWrong');
+let wordToGuessElem = document.querySelector('.hero-name');
+let mistakesElem = document.querySelector('#mistakes');
+let hangmanPicElem = document.querySelector('#hangmanPic');
 
 const start = document.querySelector('#start');
-start.addEventListener('click', getRandomHeroName);
+start.addEventListener('click', reset);
 
 function fetchHeroNames() {
     dotaHeroes().then(results => {
@@ -36,8 +38,6 @@ function getRandomHeroName() {
         randomHeroName = randomHeroName.replace(' ', '_');
     }
 
-    triesSetur();
-
     guessedWord();
     console.log(randomHeroName);    
 }
@@ -45,7 +45,7 @@ function getRandomHeroName() {
 function generateButtons() {
     document.querySelector('.letters').innerHTML = '';
 
-    let characters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '_', " ' "];
+    let characters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', " ' ", ' _ '];
     characters.forEach(char => {
 
         let btn = document.createElement('button');
@@ -57,8 +57,6 @@ function generateButtons() {
 }
 
 function handleGuess() {
-    console.log(this.innerText);
-
     guessed.indexOf(this.innerText) === -1 ? guessed.push(this.innerText) : null;
     this.setAttribute('disabled', true);
 
@@ -66,25 +64,10 @@ function handleGuess() {
         guessedWord();
         checkIfGameWon();
     } else if (randomHeroName.indexOf(this.innerText) === -1) {
-        // mistakes++;
-        // updateMistakes();
-        // checkIfGameLost();
-        // updateHangmanPicture();
-    }
-}
-
-function triesSetur() {
-    if (randomHeroName.length < 5) {
-        maxWrong = 3;
-        maxWrongElem.innerText = maxWrong;
-    }
-    else if (randomHeroName.length < 10) {
-        maxWrong = 5;
-        maxWrongElem.innerText = maxWrong;
-    }
-    else {
-        maxWrong = 7;
-        maxWrongElem.innerText = maxWrong;
+        mistakes++;
+        updateMistakes();
+        updateHangmanPicture();
+        checkIfGameLost();
     }
 }
 
@@ -95,16 +78,39 @@ function guessedWord() {
     document.querySelector('.hero-name').innerHTML = wordStatus;
 }
 
+function updateMistakes() {
+    mistakesElem.innerHTML = mistakes;
+}
+
+function updateHangmanPicture() {
+    hangmanPicElem.src = `./images/hangman-${mistakes}.png`;
+}
+
 function checkIfGameWon() {
     if (randomHeroName == wordStatus) {
-        guessed = [];
-        generateButtons();
-        console.log('Correct');        
+        wordToGuessElem.innerHTML = `Correct! <br> 
+                                    You Win!`;   
     }
 }
 
-fetchHeroNames();
-// getRandomHeroName();
-generateButtons();
-guessedWord();
+function checkIfGameLost() {
+    if (mistakes == maxWrong) {
+        wordToGuessElem.innerHTML = `You lost!<br>
+                                    Hero name was: ${randomHeroName}`;
+    }
+}
 
+function reset() {
+    mistakes = 0;
+    guessed = [];
+    hangmanPicElem.src = './images/hangman-0.png';
+    start.innerText = 'Restart';
+  
+    getRandomHeroName();
+    generateButtons();
+    guessedWord();
+    updateMistakes();
+    generateButtons();
+  }
+
+fetchHeroNames();
