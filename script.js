@@ -9,8 +9,8 @@ let wordToGuessElem = document.querySelector('.hero-name');
 let mistakesElem = document.querySelector('#mistakes');
 let hangmanPicElem = document.querySelector('#hangmanPic');
 
-const start = document.querySelector('#start');
-start.addEventListener('click', reset);
+const startBtn = document.querySelector('#start');
+startBtn.addEventListener('click', reset);
 
 function fetchHeroNames() {
     dotaHeroes().then(results => {
@@ -83,20 +83,27 @@ function updateMistakes() {
 }
 
 function updateHangmanPicture() {
+    hangmanPicElem.classList.add('animOnMiss');
+
     hangmanPicElem.src = `./images/hangman-${mistakes}.png`;
+
+    setTimeout(() => {
+        hangmanPicElem.classList.remove('animOnMiss');
+    }, 500);
+
 }
 
 function checkIfGameWon() {
     if (randomHeroName == wordStatus) {
-        wordToGuessElem.innerHTML = `Correct! <br> 
-                                    You Win!`;   
+        wordToGuessElem.innerHTML = `<h3 class="won">Correct! <br> 
+                                    You Win!</h3`;   
     }
 }
 
 function checkIfGameLost() {
     if (mistakes == maxWrong) {
-        wordToGuessElem.innerHTML = `You lost!<br>
-                                    Hero name was: ${randomHeroName}`;
+        wordToGuessElem.innerHTML = `<h3 class="lost">You lost!<br>
+                                    Hero was: ${randomHeroName}</h3>`;
     }
 }
 
