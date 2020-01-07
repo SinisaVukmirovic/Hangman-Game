@@ -90,20 +90,36 @@ function updateHangmanPicture() {
     setTimeout(() => {
         hangmanPicElem.classList.remove('animOnMiss');
     }, 500);
-
 }
 
 function checkIfGameWon() {
     if (randomHeroName == wordStatus) {
-        wordToGuessElem.innerHTML = `<h3 class="won">Correct! <br> 
-                                    You Win!</h3`;   
+        wordToGuessElem.innerHTML = `
+            <h3 class="won fadeIn">Correct! <br> 
+            You Win!</h3>
+        `;
+
+        document.querySelector('.letters').style.display = 'block';
+
+        document.querySelector('.letters').innerHTML = `
+            <img class='fadeIn' src='./images/won.jpg' />
+        `; 
     }
 }
 
 function checkIfGameLost() {
     if (mistakes == maxWrong) {
-        wordToGuessElem.innerHTML = `<h3 class="lost">You lost!<br>
-                                    Hero was: ${randomHeroName}</h3>`;
+        wordToGuessElem.innerHTML = `
+            <h3 class="lost fadeIn">You lost!<br>
+            Hero was: ${randomHeroName}</h3>
+        `;
+
+        document.querySelector('.letters').style.display = 'block';
+
+        document.querySelector('.letters').innerHTML = `
+            <img class='fadeIn' src='./images/lost.jpg' />
+        `;
+
     }
 }
 
@@ -111,7 +127,8 @@ function reset() {
     mistakes = 0;
     guessed = [];
     hangmanPicElem.src = './images/hangman-0.png';
-    start.innerText = 'Restart';
+    startBtn.innerText = 'Restart';
+    document.querySelector('.letters').style.display = 'grid';
   
     getRandomHeroName();
     generateButtons();
