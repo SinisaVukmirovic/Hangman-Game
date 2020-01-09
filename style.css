@@ -39,7 +39,7 @@ header {
         color: #111;
         border-radius: .25em;
         transform: rotate(-15deg);
-        margin: -.5em 0 0 4em;
+        margin: -.25em 0 0 3em;
     }
 
 .gameplay {
@@ -71,6 +71,16 @@ header {
         justify-content: center;
         align-items: center;
     }
+    
+    .hangman {
+        flex: 1;
+        padding: 1em;
+    }
+        .hangman img {
+            width: 90%;
+            object-fit: cover;
+            box-shadow: 0 70px 50px -50px #000;
+        }
 
     .tries-left {
         flex: 1;
@@ -98,16 +108,6 @@ header {
     font-size: 1.25rem;
 }
 
-.hangman {
-    flex: 1;
-    padding: 1em;
-}
-    .hangman img {
-        width: 90%;
-        object-fit: cover;
-        box-shadow: 0 70px 50px -50px #000;
-    }
-
 button {
     cursor: pointer;
 }
@@ -133,14 +133,18 @@ button {
     outline: none;
     border: 1px solid #000;
     box-shadow: 2px 2px 20px #000;
-    width: 80%;
+    width: 30%;
     font-size: 1.5rem;
-    background-color: var(--dotaYellow);
-    color: #111;
+    padding: .25em 0;
+    background-color: var(--dotaRed);
+    color: var(--dotaFontClr);
     transition: .5s;
 }
     #start:hover {
-        filter: brightness(.9);
+        filter: brightness(110%);
+    }
+    #start:active {
+        transform: scale(.95);
     }
 
 .animOnMiss {
@@ -153,8 +157,7 @@ button {
 }
 
 img.fadeIn {
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .fadeIn {
@@ -190,7 +193,8 @@ img.fadeIn {
         font-size: 10px;
     }
     .gameplay {
-        margin: 2em 1em;
+        min-height: 75vh;
+        margin: 5em 1em;
         padding: .5em;
         flex-direction: column;
     }
