@@ -1,8 +1,6 @@
 :root {
     --dotaRed: #9c3627;
     --dotaYellow: #f5bf23;
-    --lighterRed: #a44427;
-    --darkerRed: #893424;
     --frameRed: #381518;
     --dotaFontClr: #a8babc;
     --bgClr: #232425;
@@ -25,7 +23,7 @@ header {
     position: relative;
     padding: 1em;
     text-align: center;
-    background-color: crimson;
+    background: var(--dotaRed);
     color: #eee;
     letter-spacing: 10px;
     box-shadow: 0 3px 20px #000;
@@ -43,6 +41,7 @@ header {
     }
 
 .gameplay {
+    max-width: 900px;
     min-height: 35rem;
     background-color: var(--frameClr);
     margin: 5em 15%;
@@ -104,7 +103,7 @@ header {
 
 .hero-name-letters {
     flex: 3;
-    padding: 2em 1em;
+    padding: 2em 1em .5em;
     font-size: 1.25rem;
 }
 
@@ -187,18 +186,29 @@ img.fadeIn {
     html {
         font-size: 12px;
     }
+    .gameplay {
+        min-height: 80vh;
+        padding: 1em;
+        flex-direction: column;
+    }
+    .hangman-tries-left {
+        flex-direction: row;
+    }
 }
 @media only screen and (max-width: 414px) {
     html {
         font-size: 10px;
     }
     .gameplay {
-        min-height: 75vh;
-        margin: 5em 1em;
+        min-height: 80vh;
+        margin: 4em 2em;
         padding: .5em;
         flex-direction: column;
     }
     .hangman-tries-left {
         flex-direction: row;
+    }
+    .hero-name-letters {
+        padding: 2em .5em 1em;
     }
 }
