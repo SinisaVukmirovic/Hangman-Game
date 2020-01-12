@@ -44,8 +44,8 @@ header {
     max-width: 900px;
     min-height: 35rem;
     background-color: var(--frameClr);
-    margin: 5em 15%;
-    padding: .25em;
+    margin: 5em auto;
+    padding: .5em;
     display: flex;
     box-shadow: 1px 1px 25px #000,
                 -1px -1px 25px #000;
@@ -61,11 +61,10 @@ header {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin: .75em;
+    margin: .75rem; /* setting in REMs so it is the same and independent on font size */
     text-align: center;
 }
     .hangman, .tries-left {
-        margin: .5em;
         display: flex;
         justify-content: center;
         align-items: center;
